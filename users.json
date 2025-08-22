@@ -1,0 +1,19 @@
+{
+  "1370625535": {
+    "lang": "en",
+    "ex": "bitget",
+    "pair": "BTC/USDT",
+    "tf": "1h",
+    "follow": null,
+    "keys": {},
+    "signals_today": {
+      "n": 0,
+      "day": "2025-08-20"
+    },
+    "trades_today": {
+      "n": 0,
+      "day": "2025-08-20"
+    },
+    "paper_balance_usdt": 1000.0
+  }
+}
