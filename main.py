@@ -641,24 +641,25 @@ def autoscan_loop():
             send(chat_id, alert, kb=main_kb(s))
             send(chat_id, render_table(pair, best_rows, tr), kb=main_kb(s))
 
-# ----------------------- KEEP-ALIVE (Replit) -----------------------
+# ----------------------- KEEP-ALIVE (Replit/Render) -----------------------
+from flask import Flask
+import os
 
-    app = Flask(__name__)
+app = Flask(__name__)
 
-    @app.get("/")
-    def ping():
-        return "OK", 200
+@app.route("/")
+def ping():
+    return "OK", 200
 
-    def run_flask():
-        port = int(os.getenv("PORT", 8080))
-        app.run(host="0.0.0.0", port=port, debug=False)
-
+def run_flask():
+    port = int(os.getenv("PORT", 8080))  # Render sets PORT
+    app.run(host="0.0.0.0", port=port, debug=False)
 
 # ----------------------- BOOT -----------------------
-
 if __name__ == "__main__":
     threading.Thread(target=run_flask, daemon=True).start()
     me = tg("getMe")
     log.info("Bot up as @%s", (me.get("result") or {}).get("username", "?"))
     threading.Thread(target=autoscan_loop, daemon=True).start()
     poll_loop()
+
